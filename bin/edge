@@ -6,6 +6,7 @@ var argv = require('optimist')
     .alias('d', 'debug')
     .argv;
 require('../modules/delta');
+require('../modules/ip');
 var api = require("../lib/api");
 
 function setGlobal() {

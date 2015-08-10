@@ -4,5 +4,5 @@ Edge emulator
 Usage
 ======
 ```
-	edge app.js
+$ edge app.js
 ```

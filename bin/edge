@@ -10,11 +10,8 @@ var api = require("../lib/api");
 function setGlobal() {
     global.EDGE = true;
     global.API_JSON = api.API_JSON;
-    global.EndPoint = api.GetAPI(api.API_JSON);
-    global.API = global.EndPoint.API;
-    global.EventHandler = function(event_id, paramArray) {
-        return api.EventHandler(global.API, event_id, paramArray);
-    };
+    global.API = api.API;
+    global.EMIT = api.EMIT;
 }
 
 setGlobal();

@@ -5,6 +5,7 @@ var path = require('path');
 var argv = require('optimist')
     .alias('d', 'debug')
     .argv;
+require('../modules/delta');
 var api = require("../lib/api");
 
 function setGlobal() {

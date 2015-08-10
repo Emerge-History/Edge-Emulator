@@ -1,24 +1,31 @@
 #!/usr/bin/env node
 
 var root = process.cwd();
-var platform = require('os').platform();
 var path = require('path');
-var argv = require('optimist').argv;
+var argv = require('optimist')
+    .alias('d', 'debug')
+    .argv;
 var api = require("../lib/api");
-
-if (argv._.length === 0)
-    return console.log("Please input a js file name.");
 
 function setGlobal() {
     global.EDGE = true;
     global.API_JSON = api.API_JSON;
-    global.API = api.GetAPI(api.API_JSON).API;
+    global.EndPoint = api.GetAPI(api.API_JSON);
+    global.API = global.EndPoint.API;
+    global.EventHandler = function(event_id, paramArray) {
+        return api.EventHandler(global.API, event_id, paramArray);
+    };
 }
 
 setGlobal();
-var mainFile = path.isAbsolute(argv._[0]) ? argv._[0] : path.join(root, argv._[0]);
-try {
-    require(mainFile);
-} catch (err) {
-    throw err;
+
+if(argv.debug) {
+    console.log(global.API_JSON);
+} else if(argv._.length > 0) {
+    var mainFile = path.isAbsolute(argv._[0]) ? argv._[0] : path.join(root, argv._[0]);
+    try {
+        require(mainFile);
+    } catch (err) {
+        throw err;
+    }
 }

@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+var util = require('util');
+var argv = require('optimist').argv;
+var api = require("../lib/api");
+
+if(argv._.length === 0)
+    return console.log("Please input a js file name.");
+
+function setGlobal(){
+    global.EDGE = true;
+    global.API_JSON = api.API_JSON;
+    global.API = api.GetAPI(api.API_JSON).API;
+}
+
+var mainFile = argv._[0];
+setGlobal();
+
+
+

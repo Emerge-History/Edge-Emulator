@@ -1,6 +1,6 @@
 if(global.EDGE) {
     console.log("in Edge Router");
-    API.Stat.Get("NETWORK", function(err, res){
+    API.App.Manager.List(function(err, res){
         if(err) return console.log(err);
         return console.log(res);
     });

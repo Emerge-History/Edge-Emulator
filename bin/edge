@@ -1,12 +1,18 @@
 #!/usr/bin/env node
 
 var root = process.cwd();
+require("colors");
 var path = require('path');
+var fs = require('fs');
 var argv = require('optimist')
     .alias('d', 'debug')
     .argv;
 require('../modules/delta');
 require('../modules/ip');
+require('../modules/flowcontrol');
+require('../modules/commands');
+var posix = require('posix');
+var user = require('../modules/user');
 var api = require("../lib/api");
 
 function setGlobal() {
@@ -18,12 +24,18 @@ function setGlobal() {
 
 setGlobal();
 
-if(argv.debug) {
+if (argv.debug) {
     console.log(global.API_JSON);
-} else if(argv._.length > 0) {
+} else if (argv._.length > 0) {
     var mainFile = path.isAbsolute(argv._[0]) ? argv._[0] : path.join(root, argv._[0]);
     try {
-        require(mainFile);
+        var filePath = path.resolve(mainFile);
+        var fileName = path.basename(filePath);
+        console.log(path.dirname(filePath), fileName);
+        posix.chroot(path.dirname(filePath));
+        process.chdir('/');
+        if(!fs.existsSync('/Data')) fs.mkdirSync('/Data');
+        require('/' + fileName);
     } catch (err) {
         throw err;
     }

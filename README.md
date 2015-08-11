@@ -7,9 +7,8 @@ Usage
 ```
 127.0.0.1 api.wi.fi
 ```
-[2] **append contents of nginx/nginx.conf to your nginx.conf**
 
-[3] **run program**
+[2] **run program**
 * dynamic:
 ```
 $ edge-emu -d app.js
@@ -19,7 +18,7 @@ $ edge-emu -d app.js
 $ edge-emu -s tests/
 ```
 
-[4] **dump API**
+[3] **dump API**
 ```
 $ edge-emu -l
 ```

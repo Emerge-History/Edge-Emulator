@@ -5,8 +5,11 @@ require("colors");
 var path = require('path');
 var fs = require('fs');
 var argv = require('optimist')
-    .alias('d', 'debug')
+    .alias('l', 'log')
+    .alias('s', 'static')
+    .alias('d', 'dynamic')
     .argv;
+var httpServer = require("http-server");
 require('../modules/delta');
 require('../modules/ip');
 require('../modules/flowcontrol');
@@ -24,18 +27,48 @@ function setGlobal() {
 
 setGlobal();
 
-if (argv.debug) {
+if (argv.log) {
     console.log(global.API_JSON);
-} else if (argv._.length > 0) {
-    var mainFile = path.isAbsolute(argv._[0]) ? argv._[0] : path.join(root, argv._[0]);
+} else {
+    var entry = '';
+    if(argv.static){
+        var stat = fs.statSync(argv.static);
+        if(!stat.isDirectory())
+            throw new Error('static mode must specify a folder rather than a file'.red);
+        entry = argv.static;
+    }
+    else if(argv.dynamic)
+        entry = argv.dynamic;
     try {
-        var filePath = path.resolve(mainFile);
+        var filePath = path.resolve(entry);
         var fileName = path.basename(filePath);
         console.log(path.dirname(filePath), fileName);
-        posix.chroot(path.dirname(filePath));
+        posix.chroot(argv.static ? filePath : path.dirname(filePath));
         process.chdir('/');
+
         if(!fs.existsSync('/Data')) fs.mkdirSync('/Data');
-        require('/' + fileName);
+        if(!fs.existsSync('/Share')) fs.mkdirSync('/Share');
+
+        if(argv.static) { // STATIC
+            var requestLogger = function(req, res, error) {
+                var date = (new Date).toUTCString();
+                if (error) {
+                    console.log('[%s] "%s %s" Error (%s): "%s"', date, req.method.red, req.url.red, error.status.toString().red, error.message.red);
+                } else {
+                    console.log('[%s] "%s %s" "%s"', date, req.method.cyan, req.url.cyan, req.headers['user-agent']);
+                }
+            };
+            var options = {
+                root: '/',
+                logFn: requestLogger,
+            };
+            var port = 8080;
+            var host = '127.0.0.1';
+            httpServer.createServer(options).listen(port, host);
+        }
+        else if(argv.dynamic) { // DYNAMIC
+            require('/' + fileName);
+        }
     } catch (err) {
         throw err;
     }

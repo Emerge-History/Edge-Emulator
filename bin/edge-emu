@@ -26,10 +26,6 @@ function setGlobal() {
     global.API = api.API;
     global.EMIT = api.EMIT;
     global.ContainsAPI = api.ContainsAPI;
-    if(!fs.existsSync('/tmp/fdsock'))
-        fsextra.mkdirSync('/tmp/fdsock');
-    if(fs.existsSync('/tmp/fdsock/webex'))
-        fsextra.removeSync('/tmp/fdsock/webex');
 }
 
 setGlobal();
@@ -37,6 +33,12 @@ setGlobal();
 if (argv.log) {
     console.log(global.API_JSON);
 } else if (argv.static || argv.dynamic) {
+
+    if(!fs.existsSync('/tmp/fdsock'))
+        fsextra.mkdirSync('/tmp/fdsock');
+    if(fs.existsSync('/tmp/fdsock/webex'))
+        fsextra.removeSync('/tmp/fdsock/webex');
+
     webex.Initialize(function(){
         var entry = '';
         if (argv.static) {

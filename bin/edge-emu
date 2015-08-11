@@ -25,6 +25,7 @@ function setGlobal() {
     global.API_JSON = api.API_JSON;
     global.API = api.API;
     global.EMIT = api.EMIT;
+    global.ContainsAPI = api.ContainsAPI;
     if(!fs.existsSync('/tmp/fdsock'))
         fsextra.mkdirSync('/tmp/fdsock');
     if(fs.existsSync('/tmp/fdsock/webex'))

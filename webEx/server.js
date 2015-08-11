@@ -22,7 +22,7 @@ app.post("*", function (req, res) {
         d = d.substr(0, d.length - 1);
     }
     console.log('Web EX Call: ' + d);
-    if (!global.API_JSON.f[d]) {
+    if (!global.ContainsAPI(d)) {
         return res.json({
             error: 'Not Found'
         });

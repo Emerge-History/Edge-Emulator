@@ -1,0 +1,24 @@
+{
+  "192.168.99.116": {
+    "CACHE-CONTROL": "max-age=1810",
+    "DATE": "Mon, 10 Aug 2015 03:16:42 GMT",
+    "ST": "urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1",
+    "USN": "uuid:4d696e69-444c-164e-9d41-00049f0203ab::urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1",
+    "EXT": "",
+    "SERVER": "3.13.0-24-generic DLNADOC/1.50 UPnP/1.0 MiniDLNA/1.1.4",
+    "LOCATION": "http://192.168.99.116:8200/rootDesc.xml",
+    "CONTENT-LENGTH": "0"
+  },
+  "192.168.99.1": {
+    "CACHE-CONTROL": "max-age=120",
+    "ST": "uuid:ac386e07-397a-4dcc-862f-4f883fff9542",
+    "USN": "uuid:ac386e07-397a-4dcc-862f-4f883fff9542",
+    "EXT": "",
+    "SERVER": "OpenWRT/OpenWrt/Attitude_Adjustment__r27418_ UPnP/1.1 MiniUPnPd/1.8",
+    "LOCATION": "http://192.168.99.1:5000/rootDesc.xml",
+    "OPT": "\"http://schemas.upnp.org/upnp/1/0/\"; ns=01",
+    "01-NLS": "1",
+    "BOOTID.UPNP.ORG": "1",
+    "CONFIGID.UPNP.ORG": "1337"
+  }
+}

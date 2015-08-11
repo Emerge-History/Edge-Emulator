@@ -1,0 +1,25 @@
+{
+  "60:d9:c7:41:d4:71": {
+    "IP": "192.168.66.10",
+    "internet_up_traffic": {
+      "Bytes": 2000,
+      "Packets": 50,
+      "LastMeasure": 1439193445935,
+      "Delta_Packets": 1,
+      "Delta_Bytes": 40,
+      "Delta_Time": 5055
+    },
+    "internet_down_traffic": {
+      "Bytes": 0,
+      "Packets": 0
+    },
+    "intranet_up_traffic": {
+      "Bytes": 0,
+      "Packets": 0
+    },
+    "intranet_down_traffic": {
+      "Bytes": 0,
+      "Packets": 0
+    }
+  }
+}

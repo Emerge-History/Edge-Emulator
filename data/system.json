@@ -1,0 +1,18 @@
+{
+  "internet_up_traffic": [
+    6320.0,
+    901425.0
+  ],
+  "internet_down_traffic": [
+    6737.0,
+    6036846.0
+  ],
+  "intranet_up_traffic": [
+    0,
+    0
+  ],
+  "intranet_down_traffic": [
+    0,
+    0
+  ]
+}

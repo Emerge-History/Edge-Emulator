@@ -1,0 +1,54 @@
+[
+  {
+    "Id": "Launcher",
+    "App": {
+      "uid": "Launcher"
+    },
+    "Status": {
+      "Heartbeat": {
+        "DeltaT": 1,
+        "Sent": 1439193491443
+      },
+      "FailHistory": [],
+      "LaunchTime": 1439176620710,
+      "PlannedLaunchTime": -1,
+      "StabilityRating": 1,
+      "State": 2,
+      "IsLauncher": false,
+      "AppUrl": "Launcher",
+      "AppName": "Launcher",
+      "MainSock": "/tmp/fdsock/f0d07e9d6b7841c199541bcf6045903a.t",
+      "WebExSock": "/tmp/fdsock/a4c0b02430f84b33b4186a0e1bdc3d1b.t",
+      "RuntimeId": "80d629af0d32421b9e1fd902dc064167",
+      "Permission": [
+        1
+      ]
+    }
+  },
+  {
+    "Id": "Test",
+    "App": {
+      "uid": "Test"
+    },
+    "Status": {
+      "Heartbeat": {
+        "DeltaT": 1,
+        "Sent": 1439193491443
+      },
+      "FailHistory": [],
+      "LaunchTime": 1439176618218,
+      "PlannedLaunchTime": -1,
+      "StabilityRating": 1,
+      "State": 2,
+      "IsLauncher": false,
+      "AppUrl": "Airplay",
+      "AppName": "Test",
+      "MainSock": "/tmp/fdsock/0aa62da7a30d45f38cf63a2918cbd532.t",
+      "WebExSock": "/tmp/fdsock/cff906193f384521a8ef5a29f5a49050.t",
+      "RuntimeId": "c7502a2b9527452b88d22b86120ec1bb",
+      "Permission": [
+        1
+      ]
+    }
+  }
+]

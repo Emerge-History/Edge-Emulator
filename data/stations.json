@@ -1,0 +1,23 @@
+{
+  "60:d9:c7:41:d4:71": {
+    "ap": "ap1",
+    "LastMeasure": 1439193233042,
+    "inactive_time": 350,
+    "rx_bytes": 1626,
+    "rx_packets": 14,
+    "tx_bytes": 0,
+    "tx_packets": 0,
+    "tx_retries": 0,
+    "tx_failed": 0,
+    "signal": -77,
+    "signal_avg": -79,
+    "tx_bitrate": "1.0MBits",
+    "rx_bitrate": "19.5MBitsMCS2",
+    "authorized": true,
+    "authenticated": true,
+    "preamble": "short",
+    "WMMWME": true,
+    "MFP": false,
+    "TDLS_peer": false
+  }
+}

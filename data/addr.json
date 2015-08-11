@@ -1,0 +1,60 @@
+{
+  "eth2": {
+    "0": {
+      "Prefix": "64",
+      "Address": "fe80::204:9fff:fe02:3aa"
+    }
+  },
+  "br0": {
+    "0": {
+      "Prefix": "64",
+      "Address": "fe80::7ca1:21ff:fe91:6956"
+    }
+  },
+  "lo": {
+    "0": {
+      "Prefix": "8",
+      "Address": "127.0.0.1"
+    },
+    "1": {
+      "Prefix": "128",
+      "Address": "::1"
+    }
+  },
+  "eth0": {},
+  "eth1": {},
+  "sit0": {},
+  "wlp1s0": {},
+  "wlP1p1s0": {},
+  "VETH": {
+    "0": {
+      "Prefix": "16",
+      "Address": "172.16.0.1"
+    },
+    "1": {
+      "Prefix": "64",
+      "Address": "fe80::d03c:f3ff:fe11:207e"
+    }
+  },
+  "ap0": {},
+  "ap1": {
+    "0": {
+      "Address": "fe80::216:3eff:fe00:6",
+      "Prefix": "64"
+    }
+  },
+  "guset0": {},
+  "guset1": {},
+  "host_4104": {
+    "0": {
+      "Address": "fe80::e871:f8ff:fe17:3834",
+      "Prefix": "64"
+    }
+  },
+  "host_4108": {
+    "0": {
+      "Address": "fe80::6ce2:eff:fe68:6afe",
+      "Prefix": "64"
+    }
+  }
+}

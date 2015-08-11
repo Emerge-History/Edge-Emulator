@@ -1,0 +1,177 @@
+{
+  "ap1": {
+    "Status": {
+      "BROADCAST": 1,
+      "MULTICAST": 1,
+      "UP": 1,
+      "LOWER_UP": 1
+    },
+    "Id": "51",
+    "Dev": "ap1",
+    "State": "UP",
+    "Mac": "00:16:3e:00:00:06",
+    "MacMask": "ff:ff:ff:ff:ff:ff"
+  },
+  "br0": {
+    "Status": {
+      "BROADCAST": 1,
+      "MULTICAST": 1,
+      "UP": 1,
+      "LOWER_UP": 1
+    },
+    "Id": "54",
+    "Dev": "br0",
+    "State": "UP",
+    "Mac": "00:16:3e:00:00:06",
+    "MacMask": "ff:ff:ff:ff:ff:ff"
+  },
+  "lo": {
+    "Status": {
+      "LOOPBACK": 1,
+      "UP": 1,
+      "LOWER_UP": 1
+    },
+    "Id": "1",
+    "Dev": "lo",
+    "State": "UNKNOWN",
+    "MacMask": "00:00:00:00:00:00"
+  },
+  "eth0": {
+    "Status": {
+      "BROADCAST": 1,
+      "MULTICAST": 1
+    },
+    "Id": "2",
+    "Dev": "eth0",
+    "State": "DOWN",
+    "Mac": "00:04:9f:02:03:ab",
+    "MacMask": "ff:ff:ff:ff:ff:ff"
+  },
+  "eth1": {
+    "Status": {
+      "BROADCAST": 1,
+      "MULTICAST": 1
+    },
+    "Id": "3",
+    "Dev": "eth1",
+    "State": "DOWN",
+    "Mac": "00:04:9f:02:03:ac",
+    "MacMask": "ff:ff:ff:ff:ff:ff"
+  },
+  "eth2": {
+    "Status": {
+      "BROADCAST": 1,
+      "MULTICAST": 1,
+      "UP": 1,
+      "LOWER_UP": 1
+    },
+    "Id": "4",
+    "Dev": "eth2",
+    "State": "UP",
+    "Mac": "00:04:9f:02:03:aa",
+    "MacMask": "ff:ff:ff:ff:ff:ff"
+  },
+  "sit0": {
+    "Status": {
+      "NOARP": 1
+    },
+    "Id": "5",
+    "Dev": "sit0",
+    "State": "DOWN",
+    "MacMask": "0.0.0.0"
+  },
+  "wlp1s0": {
+    "Status": {
+      "BROADCAST": 1,
+      "MULTICAST": 1
+    },
+    "Id": "6",
+    "Dev": "wlp1s0",
+    "State": "DOWN",
+    "Mac": "00:03:7f:00:00:00",
+    "MacMask": "ff:ff:ff:ff:ff:ff"
+  },
+  "wlP1p1s0": {
+    "Status": {
+      "BROADCAST": 1,
+      "MULTICAST": 1
+    },
+    "Id": "7",
+    "Dev": "wlP1p1s0",
+    "State": "DOWN",
+    "Mac": "00:03:7f:4a:64:d2",
+    "MacMask": "ff:ff:ff:ff:ff:ff"
+  },
+  "VETH": {
+    "Status": {
+      "BROADCAST": 1,
+      "MULTICAST": 1,
+      "UP": 1,
+      "LOWER_UP": 1
+    },
+    "Id": "8",
+    "Dev": "VETH",
+    "State": "UP",
+    "Mac": "6e:e2:0e:68:6a:fe",
+    "MacMask": "ff:ff:ff:ff:ff:ff"
+  },
+  "ap0": {
+    "Status": {
+      "BROADCAST": 1,
+      "MULTICAST": 1
+    },
+    "Id": "50",
+    "Dev": "ap0",
+    "State": "DOWN",
+    "Mac": "00:16:3e:00:00:05",
+    "MacMask": "ff:ff:ff:ff:ff:ff"
+  },
+  "guset0": {
+    "Status": {
+      "BROADCAST": 1,
+      "MULTICAST": 1
+    },
+    "Id": "52",
+    "Dev": "guset0",
+    "State": "DOWN",
+    "Mac": "00:03:7f:00:00:00",
+    "MacMask": "ff:ff:ff:ff:ff:ff"
+  },
+  "guset1": {
+    "Status": {
+      "BROADCAST": 1,
+      "MULTICAST": 1
+    },
+    "Id": "53",
+    "Dev": "guset1",
+    "State": "DOWN",
+    "Mac": "00:03:7f:4a:64:d2",
+    "MacMask": "ff:ff:ff:ff:ff:ff"
+  },
+  "host_4104": {
+    "Status": {
+      "BROADCAST": 1,
+      "MULTICAST": 1,
+      "UP": 1,
+      "LOWER_UP": 1
+    },
+    "Id": "56",
+    "Dev": "host_4104",
+    "State": "UP",
+    "Mac": "ea:71:f8:17:38:34",
+    "MacMask": "ff:ff:ff:ff:ff:ff"
+  },
+  "host_4108": {
+    "Status": {
+      "BROADCAST": 1,
+      "MULTICAST": 1,
+      "UP": 1,
+      "LOWER_UP": 1
+    },
+    "Id": "58",
+    "Dev": "host_4108",
+    "State": "UP",
+    "Mac": "6e:e2:0e:68:6a:fe",
+    "MacMask": "ff:ff:ff:ff:ff:ff"
+  }
+}

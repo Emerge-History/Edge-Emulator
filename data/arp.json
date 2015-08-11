@@ -1,0 +1,69 @@
+{
+  "00:16:3e:00:00:06": {
+    "raw": "dev ap1 lladdr 00:16:3e:00:00:06 PERMANENT",
+    "Address": "dev",
+    "Mac": "00:16:3e:00:00:06",
+    "NUD": 66
+  },
+  "20:76:93:23:a6:c8": {
+    "raw": "192.168.99.1 dev eth2 lladdr 20:76:93:23:a6:c8 REACHABLE",
+    "Address": "192.168.99.1",
+    "Dev": "eth2",
+    "Mac": "20:76:93:23:a6:c8",
+    "NUD": 16
+  },
+  "6e:e2:0e:68:6a:fe": {
+    "raw": "dev host_4108 lladdr 6e:e2:0e:68:6a:fe PERMANENT",
+    "Address": "dev",
+    "Mac": "6e:e2:0e:68:6a:fe",
+    "NUD": 66
+  },
+  "b6:b5:5d:7a:6b:1d": {
+    "raw": "fe80::b4b5:5dff:fe7a:6b1d dev VETH lladdr b6:b5:5d:7a:6b:1d STALE",
+    "Address": "fe80::b4b5:5dff:fe7a:6b1d",
+    "Dev": "veth",
+    "Mac": "b6:b5:5d:7a:6b:1d",
+    "NUD": 17
+  },
+  "ae:29:2e:8b:7b:2a": {
+    "raw": "fe80::ac29:2eff:fe8b:7b2a dev VETH lladdr ae:29:2e:8b:7b:2a STALE",
+    "Address": "fe80::ac29:2eff:fe8b:7b2a",
+    "Dev": "veth",
+    "Mac": "ae:29:2e:8b:7b:2a",
+    "NUD": 17
+  },
+  "ea:71:f8:17:38:34": {
+    "raw": "dev host_4104 lladdr ea:71:f8:17:38:34 PERMANENT",
+    "Address": "dev",
+    "Mac": "ea:71:f8:17:38:34",
+    "NUD": 66
+  },
+  "88:63:df:a0:d7:03": {
+    "raw": "192.168.99.171 dev eth2 lladdr 88:63:df:a0:d7:03 REACHABLE",
+    "Address": "192.168.99.171",
+    "Dev": "eth2",
+    "Mac": "88:63:df:a0:d7:03",
+    "NUD": 16
+  },
+  "00:13:ef:c0:13:48": {
+    "raw": "192.168.99.192 dev eth2 lladdr 00:13:ef:c0:13:48 STALE",
+    "Address": "192.168.99.192",
+    "Dev": "eth2",
+    "Mac": "00:13:ef:c0:13:48",
+    "NUD": 17
+  },
+  "70:14:a6:63:d6:07": {
+    "raw": "fe80::10ee:d75:c427:8e3e dev eth2 lladdr 70:14:a6:63:d6:07 STALE",
+    "Address": "fe80::10ee:d75:c427:8e3e",
+    "Dev": "eth2",
+    "Mac": "70:14:a6:63:d6:07",
+    "NUD": 17
+  },
+  "28:b2:bd:78:8d:95": {
+    "raw": "192.168.99.139 dev eth2 lladdr 28:b2:bd:78:8d:95 STALE",
+    "Address": "192.168.99.139",
+    "Dev": "eth2",
+    "Mac": "28:b2:bd:78:8d:95",
+    "NUD": 17
+  }
+}

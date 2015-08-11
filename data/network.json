@@ -1,0 +1,12 @@
+{
+  "config": {
+    "NetworkName": "edge-1",
+    "RouterIP": "192.168.66.1",
+    "LocalNetmask": 24,
+    "Uplink": "eth2",
+    "DropIncomingRequests": {
+      "Interface": "eth2"
+    },
+    "NetworkAddress": "192.168.66.1/24"
+  }
+}

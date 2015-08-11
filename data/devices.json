@@ -1,0 +1,160 @@
+{
+  "096073568f514348a8cbf39c3454669c": {
+    "bus": {
+      "name": "WIFI",
+      "stamp": 1439193228365,
+      "hwaddr": "60:d9:c7:41:d4:71",
+      "data": {
+        "Addr": {
+          "raw": "192.168.66.10 dev br0 lladdr 60:d9:c7:41:d4:71 REACHABLE",
+          "Address": "192.168.66.10",
+          "Dev": "br0",
+          "Mac": "60:d9:c7:41:d4:71",
+          "NUD": 16
+        },
+        "Lease": {
+          "Mac": "60:d9:c7:41:d4:71",
+          "Address": "192.168.66.10",
+          "Hostname": "ye-de-iPhone",
+          "VendorClass": "",
+          "Interface": "br0"
+        },
+        "Wireless": {
+          "ap": "ap1",
+          "LastMeasure": 1439193233042,
+          "inactive_time": 350,
+          "rx_bytes": 1626,
+          "rx_packets": 14,
+          "tx_bytes": 0,
+          "tx_packets": 0,
+          "tx_retries": 0,
+          "tx_failed": 0,
+          "signal": -77,
+          "signal_avg": -79,
+          "tx_bitrate": "1.0MBits",
+          "rx_bitrate": "19.5MBitsMCS2",
+          "authorized": true,
+          "authenticated": true,
+          "preamble": "short",
+          "WMMWME": true,
+          "MFP": false,
+          "TDLS_peer": false
+        },
+        "Traffic": {},
+        "MDNS": {},
+        "SSDP": {},
+        "Band": "WLAN2G",
+        "P0F": {}
+      }
+    },
+    "assumptions": {
+      "App_Launcher:OUI": {
+        "actions": {},
+        "attributes": {
+          "vendor": "Apple"
+        },
+        "classes": {},
+        "aux": {},
+        "valid": true,
+        "driverId": "App_Launcher:OUI"
+      },
+      "App_Launcher:NameService": {
+        "valid": true,
+        "attributes": {
+          "name": "ye-de-iPhone"
+        },
+        "driverId": "App_Launcher:NameService",
+        "actions": {},
+        "classes": {}
+      }
+    },
+    "id": "096073568f514348a8cbf39c3454669c",
+    "config": {},
+    "time": "2015-08-10T07:53:48.368Z",
+    "state": 1,
+    "owner": "",
+    "version": null
+  }
+, "4c1d99749221431daf85bed224a3b725": {
+  "bus": {
+    "name": "WIFI",
+    "stamp": 1439198279933,
+    "hwaddr": "88:63:df:a0:d7:03",
+    "data": {
+      "Addr": {
+        "raw": "192.168.66.10 dev br0 lladdr 88:63:df:a0:d7:03 REACHABLE",
+        "Address": "192.168.66.10",
+        "Dev": "br0",
+        "Mac": "88:63:df:a0:d7:03",
+        "NUD": 16
+      },
+      "Lease": {
+        "Mac": "88:63:df:a0:d7:03",
+        "Address": "192.168.66.10",
+        "Hostname": "Emerges-iMac",
+        "VendorClass": "",
+        "Interface": "br0"
+      },
+      "Wireless": {},
+      "Traffic": {
+        "IP": "192.168.66.10",
+        "internet_up_traffic": {
+          "Bytes": 30065,
+          "Packets": 204,
+          "LastMeasure": 1439198305281,
+          "Delta_Packets": 88,
+          "Delta_Bytes": 12452,
+          "Delta_Time": 5110
+        },
+        "internet_down_traffic": {
+          "Bytes": 80691,
+          "Packets": 198,
+          "LastMeasure": 1439198305280,
+          "Delta_Packets": 85,
+          "Delta_Bytes": 21738,
+          "Delta_Time": 5109
+        },
+        "intranet_up_traffic": {
+          "Bytes": 0,
+          "Packets": 0
+        },
+        "intranet_down_traffic": {
+          "Bytes": 0,
+          "Packets": 0
+        }
+      },
+      "MDNS": {},
+      "SSDP": {},
+      "Band": "WLAN2G",
+      "P0F": {}
+    }
+  },
+  "assumptions": {
+    "App_Launcher:OUI": {
+      "actions": {},
+      "attributes": {
+        "vendor": "Apple"
+      },
+      "classes": {},
+      "aux": {},
+      "valid": true,
+      "driverId": "App_Launcher:OUI"
+    },
+    "App_Launcher:NameService": {
+      "valid": true,
+      "attributes": {
+        "name": "Emerges-iMac"
+      },
+      "driverId": "App_Launcher:NameService",
+      "actions": {},
+      "classes": {}
+    }
+  },
+  "id": "4c1d99749221431daf85bed224a3b725",
+  "config": {},
+  "time": "2015-08-10T09:17:59.934Z",
+  "state": 1,
+  "owner": "",
+  "version": null
+}
+}

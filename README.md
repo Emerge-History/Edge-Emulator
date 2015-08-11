@@ -12,14 +12,14 @@ Usage
 [3] **run program**
 * dynamic:
 ```
-$ edge -d app.js
+$ edge-emu -d app.js
 ```
 * static:
 ```
-$ edge -s tests/
+$ edge-emu -s tests/
 ```
 
 [4] **dump API**
 ```
-$ edge -l
+$ edge-emu -l
 ```

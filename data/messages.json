@@ -1,0 +1,47 @@
+{
+  "196f645e07394308bb6a2d75509fadf1": {
+    "uid": "196f645e07394308bb6a2d75509fadf1",
+    "source": "cdb883f6e75e4c47a782fb0bf54f3681",
+    "senderType": "User",
+    "sender": "cdb883f6e75e4c47a782fb0bf54f3681",
+    "receiverType": "User",
+    "receiver": "b8f419102894426c91bb1e9688c4a55e",
+    "action": "send",
+    "content": "http://www.baidu.com/",
+    "timeline": false,
+    "notice": true,
+    "read": false,
+    "readTime": "2015-08-11T08:59:44.888Z",
+    "sendTime": "2015-08-11T08:59:44.888Z"
+  },
+  "e1ae4654bbc44325a1a7141a7cb31df5": {
+    "uid": "e1ae4654bbc44325a1a7141a7cb31df5",
+    "source": "cdb883f6e75e4c47a782fb0bf54f3681",
+    "senderType": "User",
+    "sender": "b8f419102894426c91bb1e9688c4a55e",
+    "receiverType": "User",
+    "receiver": "cdb883f6e75e4c47a782fb0bf54f3681",
+    "action": "send",
+    "content": "http://www.baidu.com/",
+    "timeline": true,
+    "notice": true,
+    "read": false,
+    "readTime": "2015-08-11T08:59:44.888Z",
+    "sendTime": "2015-08-11T08:59:44.888Z"
+  },
+  "a68f412406634f068d2b68a4b74a7605": {
+    "uid": "a68f412406634f068d2b68a4b74a7605",
+    "source": "cdb883f6e75e4c47a782fb0bf54f3681",
+    "senderType": "User",
+    "sender": "cdb883f6e75e4c47a782fb0bf54f3681",
+    "receiverType": "User",
+    "receiver": "b8f419102894426c91bb1e9688c4a55e",
+    "action": "send",
+    "content": "http://www.baidu.com/",
+    "timeline": true,
+    "notice": false,
+    "read": false,
+    "readTime": "2015-08-11T08:59:44.888Z",
+    "sendTime": "2015-08-11T08:59:44.888Z"
+  }
+}

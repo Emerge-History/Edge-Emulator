@@ -18,3 +18,8 @@ $ edge -d app.js
 ```
 $ edge -s tests/
 ```
+
+[4] **dump API**
+```
+$ edge -l
+```

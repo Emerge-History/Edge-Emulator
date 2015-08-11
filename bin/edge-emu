@@ -27,6 +27,8 @@ function setGlobal() {
     global.EMIT = api.EMIT;
     if(!fs.existsSync('/tmp/fdsock'))
         fsextra.mkdirSync('/tmp/fdsock');
+    if(fs.existsSync('/tmp/fdsock/webex'))
+        fsextra.removeSync('/tmp/fdsock/webex');
 }
 
 setGlobal();

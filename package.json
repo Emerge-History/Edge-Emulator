@@ -1,8 +1,15 @@
 {
-  "name": "edge",
+  "name": "edge-emu",
   "version": "0.0.1",
-  "description": "Edge' emulator",
+  "description": "Edge fs emulator",
   "repository": "emerge/Edge-Emulator",
+  "scripts": {
+    "start": "node ./bin/edge-emu"
+  },
+  "preferGlobal": "true",
+  "bin": {
+    "edge-emu": "./bin/edge-emu"
+  },
   "dependencies": {
     "optimist": "0.6.1",
     "ip": "0.3.3",

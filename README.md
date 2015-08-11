@@ -10,11 +10,11 @@ Usage
 [2] append contents of nginx/nginx.conf to your nginx.conf
 
 [3] run program
-    * dynamic:
-    ```
-    $ edge -d app.js
-    ```
-    * static:
-    ```
-    $ edge -s tests/
-    ```
+* dynamic:
+```
+$ edge -d app.js
+```
+* static:
+```
+$ edge -s tests/
+```

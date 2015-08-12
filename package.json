@@ -1,6 +1,6 @@
 {
   "name": "edge-emu",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Edge fs emulator",
   "repository": "emerge/Edge-Emulator",
   "scripts": {

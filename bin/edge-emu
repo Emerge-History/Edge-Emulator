@@ -35,6 +35,7 @@ function setGlobal() {
     global.API = api.API;
     global.EMIT = api.EMIT;
     global.ContainsAPI = api.ContainsAPI;
+    global.Server = http.createServer();
 
     var hosts = [{
         ip: '127.0.0.1', names: [
@@ -120,7 +121,9 @@ function Serve() {
                     }
                     else if (argv.dynamic) { // DYNAMIC
                         var dynamicApp = require('/' + fileName);
-                        app.use(vhost(global.host, dynamicApp));
+                        app.use(vhost(global.host, function(req, res){
+                            Server.emit('request', req, res);
+                        }));
                     }
                     cb();
                 }

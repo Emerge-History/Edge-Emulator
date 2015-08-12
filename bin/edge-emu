@@ -3,6 +3,7 @@
 var root = process.cwd();
 require("colors");
 var path = require('path');
+var os = require("os");
 var fs = require('fs');
 var http = require('http');
 var argv = require('optimist')
@@ -22,9 +23,13 @@ var user = require('../modules/user');
 var api = require("../lib/api");
 var express = require('express');
 var vhost = require('vhost');
-var webex = require("../webEx/server");
-var staticServer = require("../webEx/staticServer");
+var webexServer = require("../Servers/webExServer");
+var staticServer = require("../Servers/staticServer");
 var etcHosts = require('etc-hosts');
+
+process.on('exit', function(){
+    etcHosts.write([]);
+});
 
 function setGlobal() {
     global.EDGE = true;
@@ -33,7 +38,12 @@ function setGlobal() {
     global.EMIT = api.EMIT;
     global.ContainsAPI = api.ContainsAPI;
 
-    var hosts = [{ip:'127.0.0.1', names:['api.wifi.network']}];
+    var hosts = [{ip:'127.0.0.1', names:[
+        'api.wifi.network'
+    ]},
+        {ip:'127.0.0.1', names:[
+            'global.wifi.network'
+        ]}];
     global.host = argv.host ? argv.host : 'wifi.network';
     hosts.push({
         ip: '127.0.0.1',
@@ -55,13 +65,8 @@ function Serve() {
         console.log(global.API_JSON);
     } else if (argv.static || argv.dynamic) {
 
-        if (!fs.existsSync('/tmp/fdsock'))
-            fsextra.mkdirSync('/tmp/fdsock');
-        if (fs.existsSync('/tmp/fdsock/webex'))
-            fsextra.removeSync('/tmp/fdsock/webex');
-
         var app = express();
-        app.use(vhost('api.wifi.network', webex.app));
+        app.use(vhost('api.wifi.network', webexServer.app));
 
         var entry = '';
         if (argv.static) {
@@ -73,22 +78,48 @@ function Serve() {
         else if (argv.dynamic)
             entry = argv.dynamic;
         try {
-            var filePath = path.resolve(entry);
-            var fileName = path.basename(filePath);
-            console.log(path.dirname(filePath), fileName);
-            posix.chroot(argv.static ? filePath : path.dirname(filePath));
-            process.chdir('/');
+            var absPath = path.resolve(entry);
+            var fileName = path.basename(absPath);
+            var filePath = argv.static ? absPath : path.dirname(absPath);
+            console.log(filePath, fileName);
+            var globalPath = path.resolve(path.join(__dirname, '../Global'));
+            console.log('global.wifi.network'.green, globalPath);
 
-            if (!fs.existsSync('/Data')) fs.mkdirSync('/Data');
-            if (!fs.existsSync('/Share')) fs.mkdirSync('/Share');
+            async.series([
+                function(cb) {
+                    //if(os.platform() === 'darwin') {
+                    //    exec('ln', '-s', globalPath, path.join(filePath, 'Global'), function(){
+                    //        cb();
+                    //    });
+                    //} else {
+                    mount_auto(globalPath, path.join(filePath, 'Global'), ["--bind", '-o', 'noexec,nosuid,nodev'],
+                        function () {
+                            cb();
+                    });
+                    //}
+                },
+                function(cb) {
+                    posix.chroot(argv.static ? filePath : path.dirname(filePath));
+                    process.chdir('/');
 
-            if (argv.static) { // STATIC
-                app.use(vhost(global.host, staticServer('/')));
-            }
-            else if (argv.dynamic) { // DYNAMIC
-                require('/' + fileName);
-            }
-            app.listen(80);
+                    app.use(vhost('global.wifi.network', staticServer('/Global')));
+
+                    if (!fs.existsSync('/Data')) fs.mkdirSync('/Data');
+                    if (!fs.existsSync('/Share')) fs.mkdirSync('/Share');
+
+                    //console.log(fs.statSync('/Global'));
+
+                    if (argv.static) { // STATIC
+                        app.use(vhost(global.host, staticServer('/')));
+                    }
+                    else if (argv.dynamic) { // DYNAMIC
+                        require('/' + fileName);
+                    }
+                    cb();
+                }
+            ], function(err) {
+                app.listen(80);
+            });
         } catch (err) {
             throw err;
         }

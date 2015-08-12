@@ -37,6 +37,24 @@ global.mount_auto = function (src, target, args, callback) {
         exec.apply(undefined, ["mount"].concat(args, [src, target, callback]));
     });
 };
+
+global.umount_till_err_os_x = function (name, callback) {
+    exec("umount", name, function (err, result) {
+        if (!err) {
+            umount_till_err(name, callback);
+        }
+        else {
+            return callback(undefined, err);
+        }
+    });
+};
+global.mount_auto_os_x = function (src, target, callback) {
+    umount_till_err_os_x(target, function (err, result) {
+        if (err)
+            return callback(err, result);
+        exec.apply(undefined, ["bindfs"].concat([src, target, callback]));
+    });
+};
 global.killall = function (name, callback) {
     exec("killall", name, callback);
 };

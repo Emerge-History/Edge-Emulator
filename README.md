@@ -3,6 +3,10 @@ Edge emulator
 
 Usage
 ======
+[0] **please use linux, if your dev env under MAC OS X, then install bindfs:**
+```
+$ brew install bindfs
+```
 
 [1] **run program**
 * dynamic:
@@ -19,7 +23,7 @@ $ edge-emu -s tests/
 $ edge-emu -l
 ```
 
-[2] **specify hosts**
+[3] **specify hosts**
 ```
 $ edge-emu -h xxx.com
 ```

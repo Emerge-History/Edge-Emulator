@@ -27,7 +27,7 @@ var webexServer = require("../Servers/webExServer");
 var staticServer = require("../Servers/staticServer");
 var etcHosts = require('etc-hosts');
 
-process.on('exit', function(){
+process.on('exit', function () {
     etcHosts.write([]);
 });
 
@@ -38,20 +38,24 @@ function setGlobal() {
     global.EMIT = api.EMIT;
     global.ContainsAPI = api.ContainsAPI;
 
-    var hosts = [{ip:'127.0.0.1', names:[
-        'api.wifi.network'
-    ]},
-        {ip:'127.0.0.1', names:[
+    var hosts = [{
+        ip: '127.0.0.1', names: [
+            'api.wifi.network'
+        ]
+    },
+        {
+            ip: '127.0.0.1', names: [
             'global.wifi.network'
-        ]}];
+        ]
+        }];
     global.host = argv.host ? argv.host : 'wifi.network';
     hosts.push({
         ip: '127.0.0.1',
-        names: [ global.host ]
+        names: [global.host]
     });
     etcHosts.write(hosts);
 
-    if(argv.clean) {
+    if (argv.clean) {
         etcHosts.write([]);
     }
 }
@@ -86,22 +90,22 @@ function Serve() {
             console.log('global.wifi.network'.green, globalPath);
 
             async.series([
-                function(cb) {
-                    //if(os.platform() === 'darwin') {
-                    //    exec('ln', '-s', globalPath, path.join(filePath, 'Global'), function(){
-                    //        cb();
-                    //    });
-                    //} else {
+                function (cb) {
                     var target = path.join(filePath, 'Global');
-                    if(!fs.existsSync(target))
+                    if (!fs.existsSync(target))
                         fsextra.mkdirpSync(target);
-                    mount_auto(globalPath, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
-                        function () {
+                    if (os.platform() === 'darwin') {
+                        mount_auto_os_x(globalPath, target,function () {
                             cb();
-                    });
-                    //}
+                        });
+                    } else {
+                        mount_auto(globalPath, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
+                            function () {
+                                cb();
+                            });
+                    }
                 },
-                function(cb) {
+                function (cb) {
                     posix.chroot(argv.static ? filePath : path.dirname(filePath));
                     process.chdir('/');
 
@@ -120,7 +124,7 @@ function Serve() {
                     }
                     cb();
                 }
-            ], function(err) {
+            ], function (err) {
                 app.listen(80);
             });
         } catch (err) {

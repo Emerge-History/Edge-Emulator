@@ -15,7 +15,7 @@
         "Lease": {
           "Mac": "60:d9:c7:41:d4:71",
           "Address": "192.168.66.10",
-          "Hostname": "ye-de-printer",
+          "Hostname": "super photo printer",
           "VendorClass": "",
           "Interface": "br0"
         },
@@ -392,7 +392,7 @@
     "config": {},
     "time": "2015-08-10T07:53:48.368Z",
     "state": 1,
-    "owner": "",
+    "owner": "cdb883f6e75e4c47a782fb0bf54f3681",
     "version": null
   }
 , "4c1d99749221431daf85bed224a3b725": {
@@ -415,7 +415,27 @@
         "VendorClass": "",
         "Interface": "br0"
       },
-      "Wireless": {},
+      "Wireless": {
+        "ap": "ap1",
+        "LastMeasure": 1439193233042,
+        "inactive_time": 350,
+        "rx_bytes": 1626,
+        "rx_packets": 14,
+        "tx_bytes": 0,
+        "tx_packets": 0,
+        "tx_retries": 0,
+        "tx_failed": 0,
+        "signal": -77,
+        "signal_avg": -79,
+        "tx_bitrate": "1.0MBits",
+        "rx_bitrate": "19.5MBitsMCS2",
+        "authorized": true,
+        "authenticated": true,
+        "preamble": "short",
+        "WMMWME": true,
+        "MFP": false,
+        "TDLS_peer": false
+      },
       "Traffic": {
         "IP": "192.168.66.11",
         "internet_up_traffic": {
@@ -483,7 +503,7 @@
   "config": {},
   "time": "2015-08-10T09:17:59.934Z",
   "state": 1,
-  "owner": "",
+  "owner": "b8f419102894426c91bb1e9688c4a55e",
   "version": null
 }
 }

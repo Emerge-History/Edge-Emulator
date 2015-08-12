@@ -41,7 +41,7 @@ global.mount_auto = function (src, target, args, callback) {
 global.umount_till_err_os_x = function (name, callback) {
     exec("umount", name, function (err, result) {
         if (!err) {
-            umount_till_err(name, callback);
+            umount_till_err_os_x(name, callback);
         }
         else {
             return callback(undefined, err);

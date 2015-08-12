@@ -14,9 +14,7 @@ var argv = require('optimist')
     .alias('d', 'dynamic')
     .argv;
 var fsextra = require("fs-extra");
-require('../modules/delta');
-require('../modules/ip');
-require('../modules/flowcontrol');
+require('../modules/use');
 require('../modules/commands');
 var posix = require('posix');
 var user = require('../modules/user');
@@ -106,7 +104,8 @@ function Serve() {
                     }
                 },
                 function (cb) {
-                    posix.chroot(argv.static ? filePath : path.dirname(filePath));
+                    console.log('/ == '.green, filePath.red);
+                    posix.chroot(filePath);
                     process.chdir('/');
 
                     app.use(vhost('global.wifi.network', staticServer('/Global')));
@@ -114,13 +113,14 @@ function Serve() {
                     if (!fs.existsSync('/Data')) fs.mkdirSync('/Data');
                     if (!fs.existsSync('/Share')) fs.mkdirSync('/Share');
 
-                    //console.log(fs.statSync('/Global'));
+                    //console.log(fs.readdirSync('/'));
 
                     if (argv.static) { // STATIC
                         app.use(vhost(global.host, staticServer('/')));
                     }
                     else if (argv.dynamic) { // DYNAMIC
-                        require('/' + fileName);
+                        var dynamicApp = require('/' + fileName);
+                        app.use(vhost(global.host, dynamicApp));
                     }
                     cb();
                 }

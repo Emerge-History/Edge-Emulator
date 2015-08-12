@@ -9,7 +9,7 @@ $ brew install bindfs
 ```
 
 [1] **run program**
-* dynamic:
+* dynamic (in app.js, you should export express app) :
 ```
 $ edge-emu -d app.js
 ```

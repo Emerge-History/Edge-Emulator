@@ -1,0 +1,13 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "4.13.1",
+    "morgan": "1.5.3",
+    "vhost": "3.0.1",
+    "serve-favicon": "*",
+    "body-parser": "*",
+    "ejs": "*",
+    "cookies": "*"
+  }
+}

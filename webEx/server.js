@@ -2,11 +2,22 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var fs = require('fs');
-var _port = "/tmp/fdsock/webex";
+var _port = 80;
+        //"/tmp/fdsock/webex";
 var methods = require('../lib/methods');
 
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    next();
+}
+
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));app.use(allowCrossDomain);
+app.use(allowCrossDomain);
 app.post("/", function (req, res) {
     res.json({
         result: "welcome"
@@ -66,7 +77,7 @@ app.post("*", function (req, res) {
 function Initialize(cb) {
     console.log("Initializing WebEX");
     app.listen(_port, function () {
-        exec("chmod", "777", _port);
+        //exec("chmod", "777", _port);
         cb();
     });
 }

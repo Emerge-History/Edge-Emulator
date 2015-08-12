@@ -8,6 +8,7 @@ var fs = require('fs');
 var http = require('http');
 var argv = require('optimist')
     .alias('l', 'log')
+    .alias('g', 'global')
     .alias('h', 'host')
     .alias('c', 'clean')
     .alias('s', 'static')
@@ -36,6 +37,7 @@ function setGlobal() {
     global.EMIT = api.EMIT;
     global.ContainsAPI = api.ContainsAPI;
     global.Server = http.createServer();
+    global.globalPath = path.resolve(path.join(__dirname, '../Global'));
 
     var hosts = [{
         ip: '127.0.0.1', names: [
@@ -56,6 +58,10 @@ function setGlobal() {
 
     if (argv.clean) {
         etcHosts.write([]);
+    }
+
+    if(argv.global) {
+        global.globalPath = argv.global;
     }
 }
 
@@ -85,8 +91,7 @@ function Serve() {
             var fileName = path.basename(absPath);
             var filePath = argv.static ? absPath : path.dirname(absPath);
             console.log(filePath, fileName);
-            var globalPath = path.resolve(path.join(__dirname, '../Global'));
-            console.log('global.wifi.network'.green, globalPath);
+            console.log('global.wifi.network'.green, global.globalPath);
 
             async.series([
                 function (cb) {
@@ -94,11 +99,11 @@ function Serve() {
                     if (!fs.existsSync(target))
                         fsextra.mkdirpSync(target);
                     if (os.platform() === 'darwin') {
-                        mount_auto_os_x(globalPath, target,function () {
+                        mount_auto_os_x(global.globalPath, target,function () {
                             cb();
                         });
                     } else {
-                        mount_auto(globalPath, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
+                        mount_auto(global.globalPath, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
                             function () {
                                 cb();
                             });

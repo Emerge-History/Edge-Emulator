@@ -32,3 +32,8 @@ $ edge-emu -h xxx.com
 ```
 $ edge-emu -c
 ```
+
+[5] **specify global resource folder (absolute path): **
+```
+$ edge-emu -g /repo/global
+```

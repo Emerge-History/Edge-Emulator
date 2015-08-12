@@ -44,7 +44,7 @@ if (argv.log) {
         fsextra.removeSync('/tmp/fdsock/webex');
 
     var app = express();
-    app.use(vhost('api.wi.fi', webex.app));
+    app.use(vhost('api.wifi.network', webex.app));
 
     var entry = '';
     if (argv.static) {

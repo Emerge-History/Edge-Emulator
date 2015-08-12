@@ -61,7 +61,7 @@ function setGlobal() {
     }
 
     if(argv.global) {
-        global.globalPath = argv.global;
+        global.globalPath = path.resolve(argv.global);
     }
 }
 

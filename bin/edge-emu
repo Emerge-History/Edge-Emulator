@@ -84,8 +84,12 @@ function Serve() {
                 throw new Error('static mode must specify a folder rather than a file'.red);
             entry = argv.static;
         }
-        else if (argv.dynamic)
+        else if (argv.dynamic) {
+            var stat = fs.statSync(argv.dynamic);
+            if (!stat.isFile())
+                throw new Error('dynamic mode must specify a file rather than a folder'.red);
             entry = argv.dynamic;
+        }
         try {
             var absPath = path.resolve(entry);
             var fileName = path.basename(absPath);

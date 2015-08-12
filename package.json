@@ -1,6 +1,6 @@
 {
   "name": "edge-emu",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Edge fs emulator",
   "repository": "emerge/Edge-Emulator",
   "scripts": {
@@ -23,7 +23,8 @@
     "fs-extra": "0.22.1",
     "express": "4.13.1",
     "morgan": "1.5.3",
-    "vhost": "3.0.1"
+    "vhost": "3.0.1",
+    "etc-hosts": "0.0.1"
   },
   "engines": {
     "node": ">= 0.10.36"

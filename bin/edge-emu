@@ -7,10 +7,11 @@ var fs = require('fs');
 var http = require('http');
 var argv = require('optimist')
     .alias('l', 'log')
+    .alias('h', 'host')
+    .alias('c', 'clean')
     .alias('s', 'static')
     .alias('d', 'dynamic')
     .argv;
-//var httpServer = require("http-server");
 var fsextra = require("fs-extra");
 require('../modules/delta');
 require('../modules/ip');
@@ -23,6 +24,7 @@ var express = require('express');
 var vhost = require('vhost');
 var webex = require("../webEx/server");
 var staticServer = require("../webEx/staticServer");
+var etcHosts = require('etc-hosts');
 
 function setGlobal() {
     global.EDGE = true;
@@ -30,49 +32,65 @@ function setGlobal() {
     global.API = api.API;
     global.EMIT = api.EMIT;
     global.ContainsAPI = api.ContainsAPI;
+
+    var hosts = [{ip:'127.0.0.1', names:['api.wifi.network']}];
+    global.host = argv.host ? argv.host : 'wifi.network';
+    hosts.push({
+        ip: '127.0.0.1',
+        names: [ global.host ]
+    });
+    etcHosts.write(hosts);
+
+    if(argv.clean) {
+        etcHosts.write([]);
+    }
 }
 
 setGlobal();
 
-if (argv.log) {
-    console.log(global.API_JSON);
-} else if (argv.static || argv.dynamic) {
+setTimeout(Serve, 2000);
 
-    if(!fs.existsSync('/tmp/fdsock'))
-        fsextra.mkdirSync('/tmp/fdsock');
-    if(fs.existsSync('/tmp/fdsock/webex'))
-        fsextra.removeSync('/tmp/fdsock/webex');
+function Serve() {
+    if (argv.log) {
+        console.log(global.API_JSON);
+    } else if (argv.static || argv.dynamic) {
 
-    var app = express();
-    app.use(vhost('api.wifi.network', webex.app));
+        if (!fs.existsSync('/tmp/fdsock'))
+            fsextra.mkdirSync('/tmp/fdsock');
+        if (fs.existsSync('/tmp/fdsock/webex'))
+            fsextra.removeSync('/tmp/fdsock/webex');
 
-    var entry = '';
-    if (argv.static) {
-        var stat = fs.statSync(argv.static);
-        if (!stat.isDirectory())
-            throw new Error('static mode must specify a folder rather than a file'.red);
-        entry = argv.static;
-    }
-    else if (argv.dynamic)
-        entry = argv.dynamic;
-    try {
-        var filePath = path.resolve(entry);
-        var fileName = path.basename(filePath);
-        console.log(path.dirname(filePath), fileName);
-        posix.chroot(argv.static ? filePath : path.dirname(filePath));
-        process.chdir('/');
+        var app = express();
+        app.use(vhost('api.wifi.network', webex.app));
 
-        if (!fs.existsSync('/Data')) fs.mkdirSync('/Data');
-        if (!fs.existsSync('/Share')) fs.mkdirSync('/Share');
-
-        if (argv.static) { // STATIC
-            app.use(vhost('localhost', staticServer('/')));
+        var entry = '';
+        if (argv.static) {
+            var stat = fs.statSync(argv.static);
+            if (!stat.isDirectory())
+                throw new Error('static mode must specify a folder rather than a file'.red);
+            entry = argv.static;
         }
-        else if (argv.dynamic) { // DYNAMIC
-            require('/' + fileName);
+        else if (argv.dynamic)
+            entry = argv.dynamic;
+        try {
+            var filePath = path.resolve(entry);
+            var fileName = path.basename(filePath);
+            console.log(path.dirname(filePath), fileName);
+            posix.chroot(argv.static ? filePath : path.dirname(filePath));
+            process.chdir('/');
+
+            if (!fs.existsSync('/Data')) fs.mkdirSync('/Data');
+            if (!fs.existsSync('/Share')) fs.mkdirSync('/Share');
+
+            if (argv.static) { // STATIC
+                app.use(vhost(global.host, staticServer('/')));
+            }
+            else if (argv.dynamic) { // DYNAMIC
+                require('/' + fileName);
+            }
+            app.listen(80);
+        } catch (err) {
+            throw err;
         }
-        app.listen(80);
-    } catch (err) {
-        throw err;
     }
 }

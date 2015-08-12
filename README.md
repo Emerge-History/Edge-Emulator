@@ -3,12 +3,8 @@ Edge emulator
 
 Usage
 ======
-[1] **append a line to /etc/hosts:**
-```
-127.0.0.1 api.wifi.network
-```
 
-[2] **run program**
+[1] **run program**
 * dynamic:
 ```
 $ edge-emu -d app.js
@@ -18,7 +14,17 @@ $ edge-emu -d app.js
 $ edge-emu -s tests/
 ```
 
-[3] **dump API**
+[2] **dump API**
 ```
 $ edge-emu -l
+```
+
+[2] **specify hosts**
+```
+$ edge-emu -h xxx.com
+```
+
+[4] **clean hosts**
+```
+$ edge-emu -c
 ```

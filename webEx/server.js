@@ -14,7 +14,6 @@ var allowCrossDomain = function(req, res, next) {
     next();
 }
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));app.use(allowCrossDomain);
 app.use(allowCrossDomain);
@@ -74,11 +73,4 @@ app.post("*", function (req, res) {
     }
 });
 
-function Initialize(cb) {
-    console.log("Initializing WebEX");
-    app.listen(_port, function () {
-        //exec("chmod", "777", _port);
-        cb();
-    });
-}
-exports.Initialize = Initialize;
+module.exports.app = app;

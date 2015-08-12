@@ -5,7 +5,7 @@ Usage
 ======
 [1] **append a line to /etc/hosts:**
 ```
-127.0.0.1 api.wi.fi
+127.0.0.1 api.wifi.network
 ```
 
 [2] **run program**

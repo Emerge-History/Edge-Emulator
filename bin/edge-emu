@@ -4,12 +4,13 @@ var root = process.cwd();
 require("colors");
 var path = require('path');
 var fs = require('fs');
+var http = require('http');
 var argv = require('optimist')
     .alias('l', 'log')
     .alias('s', 'static')
     .alias('d', 'dynamic')
     .argv;
-var httpServer = require("http-server");
+//var httpServer = require("http-server");
 var fsextra = require("fs-extra");
 require('../modules/delta');
 require('../modules/ip');
@@ -18,7 +19,10 @@ require('../modules/commands');
 var posix = require('posix');
 var user = require('../modules/user');
 var api = require("../lib/api");
+var express = require('express');
+var vhost = require('vhost');
 var webex = require("../webEx/server");
+var staticServer = require("../webEx/staticServer");
 
 function setGlobal() {
     global.EDGE = true;
@@ -34,53 +38,41 @@ if (argv.log) {
     console.log(global.API_JSON);
 } else if (argv.static || argv.dynamic) {
 
-    //if(!fs.existsSync('/tmp/fdsock'))
-    //    fsextra.mkdirSync('/tmp/fdsock');
-    //if(fs.existsSync('/tmp/fdsock/webex'))
-    //    fsextra.removeSync('/tmp/fdsock/webex');
+    if(!fs.existsSync('/tmp/fdsock'))
+        fsextra.mkdirSync('/tmp/fdsock');
+    if(fs.existsSync('/tmp/fdsock/webex'))
+        fsextra.removeSync('/tmp/fdsock/webex');
 
-    webex.Initialize(function(){
-        var entry = '';
-        if (argv.static) {
-            var stat = fs.statSync(argv.static);
-            if (!stat.isDirectory())
-                throw new Error('static mode must specify a folder rather than a file'.red);
-            entry = argv.static;
+    var app = express();
+    app.use(vhost('api.wi.fi', webex.app));
+
+    var entry = '';
+    if (argv.static) {
+        var stat = fs.statSync(argv.static);
+        if (!stat.isDirectory())
+            throw new Error('static mode must specify a folder rather than a file'.red);
+        entry = argv.static;
+    }
+    else if (argv.dynamic)
+        entry = argv.dynamic;
+    try {
+        var filePath = path.resolve(entry);
+        var fileName = path.basename(filePath);
+        console.log(path.dirname(filePath), fileName);
+        posix.chroot(argv.static ? filePath : path.dirname(filePath));
+        process.chdir('/');
+
+        if (!fs.existsSync('/Data')) fs.mkdirSync('/Data');
+        if (!fs.existsSync('/Share')) fs.mkdirSync('/Share');
+
+        if (argv.static) { // STATIC
+            app.use(vhost('localhost', staticServer('/')));
         }
-        else if (argv.dynamic)
-            entry = argv.dynamic;
-        try {
-            var filePath = path.resolve(entry);
-            var fileName = path.basename(filePath);
-            console.log(path.dirname(filePath), fileName);
-            posix.chroot(argv.static ? filePath : path.dirname(filePath));
-            process.chdir('/');
-
-            if (!fs.existsSync('/Data')) fs.mkdirSync('/Data');
-            if (!fs.existsSync('/Share')) fs.mkdirSync('/Share');
-
-            if (argv.static) { // STATIC
-                var requestLogger = function (req, res, error) {
-                    var date = (new Date).toUTCString();
-                    if (error) {
-                        console.log('[%s] "%s %s" Error (%s): "%s"', date, req.method.red, req.url.red, error.status.toString().red, error.message.red);
-                    } else {
-                        console.log('[%s] "%s %s" "%s"', date, req.method.cyan, req.url.cyan, req.headers['user-agent']);
-                    }
-                };
-                var options = {
-                    root: '/',
-                    logFn: requestLogger,
-                };
-                var port = 8080;
-                var host = '127.0.0.1';
-                httpServer.createServer(options).listen(port, host);
-            }
-            else if (argv.dynamic) { // DYNAMIC
-                require('/' + fileName);
-            }
-        } catch (err) {
-            throw err;
+        else if (argv.dynamic) { // DYNAMIC
+            require('/' + fileName);
         }
-    });
+        app.listen(80);
+    } catch (err) {
+        throw err;
+    }
 }

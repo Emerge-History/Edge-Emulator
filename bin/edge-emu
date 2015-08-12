@@ -92,7 +92,10 @@ function Serve() {
                     //        cb();
                     //    });
                     //} else {
-                    mount_auto(globalPath, path.join(filePath, 'Global'), ["--bind", '-o', 'noexec,nosuid,nodev'],
+                    var target = path.join(filePath, 'Global');
+                    if(!fs.existsSync(target))
+                        fsextra.mkdirpSync(target);
+                    mount_auto(globalPath, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
                         function () {
                             cb();
                     });

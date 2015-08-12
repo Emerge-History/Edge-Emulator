@@ -15,7 +15,7 @@
         "Lease": {
           "Mac": "60:d9:c7:41:d4:71",
           "Address": "192.168.66.10",
-          "Hostname": "ye-de-iPhone",
+          "Hostname": "ye-de-printer",
           "VendorClass": "",
           "Interface": "br0"
         },
@@ -51,7 +51,7 @@
       "App_Launcher:OUI": {
         "actions": {},
         "attributes": {
-          "vendor": "Apple"
+          "vendor": "Cannon"
         },
         "classes": {},
         "aux": {},
@@ -61,11 +61,331 @@
       "App_Launcher:NameService": {
         "valid": true,
         "attributes": {
-          "name": "ye-de-iPhone"
+          "name": "super photo printer"
         },
         "driverId": "App_Launcher:NameService",
         "actions": {},
         "classes": {}
+      },
+      "App_Launcher:IPPService": {
+        "valid": true,
+        "attributes": {
+          "vendor": "cannon",
+          "images": [ "printer.png", "printer-large.png"],
+          "printer.ipp": {
+            "queued-job-count": 0,
+            "uri-authentication-supported": "none",
+            "uri-security-supported": "none",
+            "copies-default": 1,
+            "document-format-supported": [
+              "application/octet-stream",
+              "image/jpeg",
+              "image/urf",
+              "image/pwg-raster"
+            ],
+            "document-format-default": "application/octet-stream",
+            "orientation-requested-supported": "portrait",
+            "orientation-requested-default": "portrait",
+            "jpeg-k-octets-supported": [
+              0,
+              12288
+            ],
+            "jpeg-x-dimension-supported": [
+              16,
+              9600
+            ],
+            "jpeg-y-dimension-supported": [
+              16,
+              9600
+            ],
+            "color-supported": true,
+            "finishings-supported": "none",
+            "finishings-default": "none",
+            "output-bin-supported": "face-up",
+            "output-bin-default": "face-up",
+            "print-color-mode-supported": [
+              "color",
+              "monochrome",
+              "auto",
+              "auto-monochrome"
+            ],
+            "output-mode-supported": [
+              "color",
+              "monochrome",
+              "auto",
+              "auto-monochrome"
+            ],
+            "print-color-mode-default": "color",
+            "output-mode-default": "color",
+            "pages-per-minute": 7,
+            "pages-per-minute-color": 3,
+            "pdf-versions-supported": "none",
+            "printer-resolution-supported": [
+              600,
+              600,
+              "dpi"
+            ],
+            "printer-resolution-default": [
+              600,
+              600,
+              "dpi"
+            ],
+            "print-quality-supported": [
+              "normal",
+              "high"
+            ],
+            "print-quality-default": "normal",
+            "sides-supported": "one-sided",
+            "sides-default": "one-sided",
+            "landscape-orientation-requested-preferred": 5,
+            "printer-uuid": "urn:uuid:00000000-0000-1000-8000-D8492FDA1BAA",
+            "charset-configured": "us-ascii",
+            "charset-supported": [
+              "us-ascii",
+              "utf-8"
+            ],
+            "compression-supported": "none",
+            "copies-supported": [
+              1,
+              99
+            ],
+            "generated-natural-language-supported": "en-us",
+            "ipp-versions-supported": [
+              "1.1",
+              "2.0"
+            ],
+            "job-creation-attributes-supported": [
+              "copies",
+              "finishings",
+              "sides",
+              "orientation-requested",
+              "media",
+              "print-quality",
+              "printer-resolution",
+              "output-bin",
+              "media-col",
+              "print-color-mode",
+              "ipp-attribute-fidelity",
+              "job-name"
+            ],
+            "media-col-supported": [
+              "media-bottom-margin",
+              "media-left-margin",
+              "media-right-margin",
+              "media-size",
+              "media-source",
+              "media-top-margin",
+              "media-type"
+            ],
+            "multiple-document-jobs-supported": false,
+            "multiple-operation-time-out": 60,
+            "natural-language-configured": "en-us",
+            "operations-supported": [
+              "Print-Job",
+              "Validate-Job",
+              "Create-Job",
+              "Send-Document",
+              "Cancel-Job",
+              "Get-Job-Attributes",
+              "Get-Jobs",
+              "Get-Printer-Attributes",
+              "Identify-Printer"
+            ],
+            "pdl-override-supported": "attempted",
+            "printer-firmware-name": "IPP",
+            "printer-firmware-string-version": "2.0",
+            "printer-firmware-version": "\u0002\u0000",
+            "urf-supported": [
+              "V1.4",
+              "CP1",
+              "PQ4-5",
+              "RS600",
+              "SRGB24",
+              "W8",
+              "OB9",
+              "OFU0",
+              "IS1"
+            ],
+            "printer-kind": [
+              "document",
+              "photo"
+            ],
+            "ipp-features-supported": "airprint-1.3",
+            "identify-actions-supported": "flash",
+            "identify-actions-default": "flash",
+            "print-content-optimize-supported": "auto",
+            "print-content-optimize-default": "auto",
+            "print-scaling-supported": [
+              "none",
+              "fill",
+              "fit",
+              "auto-fit",
+              "auto"
+            ],
+            "print-scaling-default": "auto",
+            "pwg-raster-document-resolution-supported": [
+              600,
+              600,
+              "dpi"
+            ],
+            "pwg-raster-document-sheet-back": "rotated",
+            "pwg-raster-document-type-supported": [
+              "srgb_8",
+              "sgray_8"
+            ],
+            "media-size-supported": [
+              {
+                "x-dimension": 8890,
+                "y-dimension": 12700
+              },
+              {
+                "x-dimension": 10000,
+                "y-dimension": 14800
+              },
+              {
+                "x-dimension": 10160,
+                "y-dimension": 15240
+              },
+              {
+                "x-dimension": 12700,
+                "y-dimension": 17780
+              },
+              {
+                "x-dimension": 14800,
+                "y-dimension": 21000
+              },
+              {
+                "x-dimension": 18200,
+                "y-dimension": 25700
+              },
+              {
+                "x-dimension": 20320,
+                "y-dimension": 25400
+              },
+              {
+                "x-dimension": 21000,
+                "y-dimension": 29700
+              },
+              {
+                "x-dimension": 21590,
+                "y-dimension": 27940
+              },
+              {
+                "x-dimension": 21590,
+                "y-dimension": 35560
+              },
+              {
+                "x-dimension": [
+                  5500,
+                  21590
+                ],
+                "y-dimension": [
+                  9100,
+                  58420
+                ]
+              }
+            ],
+            "media-supported": [
+              "oe_photo-l_3.5x5in",
+              "jpn_hagaki_100x148mm",
+              "na_index-4x6_4x6in",
+              "na_5x7_5x7in",
+              "iso_a5_148x210mm",
+              "jis_b5_182x257mm",
+              "na_govt-letter_8x10in",
+              "iso_a4_210x297mm",
+              "na_letter_8.5x11in",
+              "na_legal_8.5x14in",
+              "custom_min_55x91mm",
+              "custom_max_215.9x584.2mm"
+            ],
+            "media-type-supported": [
+              "photographic",
+              "stationery"
+            ],
+            "media-source-supported": [
+              "auto",
+              "main"
+            ],
+            "media-top-margin-supported": [
+              0,
+              500
+            ],
+            "media-left-margin-supported": [
+              0,
+              340,
+              640
+            ],
+            "media-right-margin-supported": [
+              0,
+              340,
+              630
+            ],
+            "media-bottom-margin-supported": [
+              0,
+              500
+            ],
+            "media-default": "iso_a4_210x297mm",
+            "media-col-default": {
+              "media-size": {
+                "x-dimension": 21000,
+                "y-dimension": 29700
+              },
+              "media-bottom-margin": 500,
+              "media-left-margin": 340,
+              "media-right-margin": 340,
+              "media-top-margin": 500,
+              "media-source": "auto",
+              "media-type": "stationery"
+            },
+            "printer-is-accepting-jobs": true,
+            "printer-location": "",
+            "printer-geo-location": "geo:0.00000,0.00000,0",
+            "printer-make-and-model": "Canon iP110 series",
+            "printer-info": "Canon iP110 series",
+            "printer-dns-sd-name": "Canon iP110 series",
+            "printer-name": "iP110 series",
+            "printer-state-reasons": "none",
+            "marker-names": [
+              "Color",
+              "Black"
+            ],
+            "marker-colors": [
+              "#39D2E7#D945DD#DFD31D#2C2C2C",
+              "#101010"
+            ],
+            "marker-types": [
+              "inkCartridge",
+              "inkCartridge"
+            ],
+            "marker-high-levels": [
+              100,
+              100
+            ],
+            "marker-low-levels": [
+              15,
+              15
+            ],
+            "marker-levels": [
+              70,
+              80
+            ],
+            "printer-state": "idle",
+            "page-ranges-supported": false,
+            "printer-device-id": "MFG:Canon;CMD:BJL,BJRaster3,BSCCe,NCCe,IVEC,IVECPLI,URF;SOJ:BJNP2,BJNPe;MDL:iP110 series;CLS:PRINTER;DES:Canon iP110 series;VER:2.010;STA:10;FSI:00;HRI:6;MSI:B240,C15,E3,HASF,JOFF,K21000700;PDR:7;PSE:ADVX05694;CID:CA_IVEC1TYPE4_IJP;URF:V1.4,CP1,PQ4-5,RS600,SRGB24,W8,OB9,OFU0,IS1;",
+            "printer-up-time": 49594,
+            "printer-uri-supported": "ipp://192.168.66.10/ipp/print",
+            "printer-icons": [
+              "http://192.168.66.10/icon/printer_icon.png",
+              "http://192.168.66.10/icon/printer_icon_large.png"
+            ],
+            "printer-more-info": "http://192.168.66.10/index.html?PAGE_AAP",
+            "printer-supply-info-uri": "http://192.168.66.10/index.html?PAGE_INK"
+          }
+        },
+        "driverId": "App_Launcher:NameService",
+        "actions": { "print": "" },
+        "classes": { "printer" : ""}
       }
     },
     "id": "096073568f514348a8cbf39c3454669c",
@@ -82,22 +402,22 @@
     "hwaddr": "88:63:df:a0:d7:03",
     "data": {
       "Addr": {
-        "raw": "192.168.66.10 dev br0 lladdr 88:63:df:a0:d7:03 REACHABLE",
-        "Address": "192.168.66.10",
+        "raw": "192.168.66.11 dev br0 lladdr 88:63:df:a0:d7:03 REACHABLE",
+        "Address": "192.168.66.11",
         "Dev": "br0",
         "Mac": "88:63:df:a0:d7:03",
         "NUD": 16
       },
       "Lease": {
         "Mac": "88:63:df:a0:d7:03",
-        "Address": "192.168.66.10",
+        "Address": "192.168.66.11",
         "Hostname": "Emerges-iMac",
         "VendorClass": "",
         "Interface": "br0"
       },
       "Wireless": {},
       "Traffic": {
-        "IP": "192.168.66.10",
+        "IP": "192.168.66.11",
         "internet_up_traffic": {
           "Bytes": 30065,
           "Packets": 204,
@@ -143,11 +463,20 @@
     "App_Launcher:NameService": {
       "valid": true,
       "attributes": {
-        "name": "Emerges-iMac"
+        "name": "ye-de-iPhone"
       },
       "driverId": "App_Launcher:NameService",
       "actions": {},
       "classes": {}
+    },
+    "App_Launcher:PhoneService": {
+      "valid": true,
+      "attributes": {
+        "name": "iPhone 6"
+      },
+      "driverId": "App_Launcher:PhoneService",
+      "actions": {"shoot": ""},
+      "classes": {"camera": ""}
     }
   },
   "id": "4c1d99749221431daf85bed224a3b725",

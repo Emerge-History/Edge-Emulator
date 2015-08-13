@@ -3,10 +3,10 @@ var bodyParser = require('body-parser');
 var app = express();
 var fs = require('fs');
 var _port = 80;
-//"/tmp/fdsock/webex";
+        //"/tmp/fdsock/webex";
 var methods = require('../lib/methods');
 
-var allowCrossDomain = function (req, res, next) {
+var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -15,8 +15,7 @@ var allowCrossDomain = function (req, res, next) {
 }
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(allowCrossDomain);
+app.use(bodyParser.urlencoded({ extended: false }));app.use(allowCrossDomain);
 app.use(allowCrossDomain);
 app.post("/", function (req, res) {
     res.json({
@@ -33,45 +32,45 @@ app.post("*", function (req, res) {
         d = d.substr(0, d.length - 1);
     }
     console.log('Web EX Call: ' + d);
-    //if (!global.ContainsAPI(d)) {
-    //    return res.json({
-    //        error: 'Not Found'
-    //    });
-    //}
-    //else {
-    //console.log(req.body);
-    var params = [];
-    if (req.body) {
-        for (var i in req.body) {
-            try {
-                params.push(JSON.parse(req.body[i]));
-            }
-            catch (e) {
-                params.push(req.body[i]);
-            }
-        }
+    if (!global.ContainsAPI(d)) {
+        return res.json({
+            error: 'Not Found'
+        });
     }
-    params.push(must(function (err, result) {
-        if (err) {
-            return res.json({
-                error: err.message ? err.message : err,
-                stack: err.stack ? err.stack : []
-            });
+    else {
+        console.log(req.body);
+        var params = [];
+        if (req.body) {
+            for (var i in req.body) {
+                try {
+                    params.push(JSON.parse(req.body[i]));
+                }
+                catch (e) {
+                    params.push(req.body[i]);
+                }
+            }
         }
-        else {
-            return res.json({
-                result: result
-            });
-        }
-    }, 20000));
+        params.push(must(function (err, result) {
+            if (err) {
+                return res.json({
+                    error: err.message ? err.message : err,
+                    stack: err.stack ? err.stack : []
+                });
+            }
+            else {
+                return res.json({
+                    result: result
+                });
+            }
+        }, 20000));
 
-    try {
-        methods.MethodShell(d, params);
+        try {
+            methods.MethodShell(d, params);
+        }
+        catch (e) {
+            params[params.length - 1](e);
+        }
     }
-    catch (e) {
-        params[params.length - 1](e);
-    }
-    //}
 });
 
 module.exports.app = app;

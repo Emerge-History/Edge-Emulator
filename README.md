@@ -33,12 +33,12 @@ $ edge-emu -h xxx.com
 $ edge-emu -c
 ```
 
-[5] **specify global resource folder (absolute path): **
+[5] **specify global resource folder (absolute path):**
 ```
 $ edge-emu -g /repo/global
 ```
 
-[6] **specify symbol resource folder (absolute path): **
+[6] **specify symbol resource folder (absolute path):**
 ```
 $ edge-emu -g /resource/symbolsymbol
 ```

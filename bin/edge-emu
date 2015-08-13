@@ -33,6 +33,14 @@ process.on('exit', function () {
 });
 
 function setGlobal() {
+    global.path = require("path");
+    global.http = require("http");
+    global.fs = require("fs");
+    global.child_process = require('child_process');
+    global.qs = require("querystring");
+    global.async = require("async");
+    global._ = require("underscore");
+
     global.EDGE = true;
     global.API_JSON = api.API_JSON;
     global.API = api.API;

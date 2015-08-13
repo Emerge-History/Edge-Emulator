@@ -38,14 +38,14 @@ route.post("/", function (req, res) {
     }
 });
 
-route.get("/shit", function (req, res) {
+route.get("/holy", function (req, res) {
     API.Device.All(function(err, devices){
         if(devices){
             var keys = Object.keys(devices);
             var device =  devices[keys[0]];
             var brand = device['assumptions']['App_Launcher:OUI']['attributes']['vendor'];
             console.log('devices exists'.blue, brand);
-            API.Resource.SymbolSearch('Unknown', function(err, symbol){
+            API.Resource.SymbolSearch(brand, function(err, symbol){
                 console.log(err, symbol);
             });
         }

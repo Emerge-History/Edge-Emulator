@@ -48,6 +48,7 @@ function setGlobal() {
     global.ContainsAPI = api.ContainsAPI;
     global.Server = http.createServer();
     global.globalPath = path.resolve(path.join(__dirname, '../Global'));
+    global.datasource = path.resolve(path.join(__dirname, '../datasource'));
 
     var hosts = [{ ip: '127.0.0.1',
         names: [ 'global.wifi.network', 'api.wifi.network' ]}];
@@ -118,6 +119,21 @@ function Serve() {
                         });
                     } else {
                         mount_auto(global.globalPath, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
+                            function () {
+                                cb();
+                            });
+                    }
+                },
+                function (cb) {
+                    var target = path.join(filePath, 'datasource');
+                    if (!fs.existsSync(target))
+                        fsextra.mkdirpSync(target);
+                    if (os.platform() === 'darwin') {
+                        mount_auto_os_x(global.datasource, target,function () {
+                            cb();
+                        });
+                    } else {
+                        mount_auto(global.datasource, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
                             function () {
                                 cb();
                             });

@@ -38,8 +38,20 @@ route.post("/", function (req, res) {
     }
 });
 
-route.get("/", function (req, res) {
-    res.render("index", {css: global.css});
+route.get("/shit", function (req, res) {
+    API.Device.All(function(err, devices){
+        if(devices){
+            var keys = Object.keys(devices);
+            var device =  devices[keys[0]];
+            console.log('devices exists'.blue, device);
+            var brand = device['assumptions']['App_Launcher:OUI']['attributes']['vendor'];
+            API.Resource.SymbolSearch(brand, function(err, symbol){
+                console.log(err, symbol);
+            });
+        }
+
+        res.render("index", {css: global.css});
+    });
 });
 
 

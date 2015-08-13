@@ -68,7 +68,7 @@ function setGlobal() {
     }
 
     if(argv.symbol) {
-        global.symbol = argv.symbol;
+        global.symbol = path.resolve(argv.symbol);
         Brand.Initialize(function(err){
             if(err) return console.log('symbol init err'.red, err);
             return console.log('symbol init successful.'.green);

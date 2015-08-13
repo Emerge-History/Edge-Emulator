@@ -44,8 +44,9 @@ _Storage/
 Gruntfile.js
 tscommand-*.tmp.txt
 
-tests/Global
-tests/Data
-tests/Share
+demo/Global
+demo/Data
+demo/Share
+demo/datasource
 
 secret.json

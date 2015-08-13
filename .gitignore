@@ -34,6 +34,7 @@ node_modules
 *.map
 *.dll
 *.exe
+*.zip
 .baseDir.ts
 obj/
 _Releases/

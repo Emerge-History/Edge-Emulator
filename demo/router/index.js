@@ -43,9 +43,9 @@ route.get("/shit", function (req, res) {
         if(devices){
             var keys = Object.keys(devices);
             var device =  devices[keys[0]];
-            console.log('devices exists'.blue, device);
             var brand = device['assumptions']['App_Launcher:OUI']['attributes']['vendor'];
-            API.Resource.SymbolSearch(brand, function(err, symbol){
+            console.log('devices exists'.blue, brand);
+            API.Resource.SymbolSearch('Unknown', function(err, symbol){
                 console.log(err, symbol);
             });
         }

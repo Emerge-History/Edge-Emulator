@@ -51,7 +51,7 @@
       "App_Launcher:OUI": {
         "actions": {},
         "attributes": {
-          "vendor": "Cannon"
+          "vendor": "Canon"
         },
         "classes": {},
         "aux": {},
@@ -70,7 +70,7 @@
       "App_Launcher:IPPService": {
         "valid": true,
         "attributes": {
-          "vendor": "cannon",
+          "vendor": "Canon",
           "images": [ "printer.png", "printer-large.png"],
           "printer.ipp": {
             "queued-job-count": 0,

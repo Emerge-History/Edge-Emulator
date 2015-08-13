@@ -108,61 +108,78 @@ function Serve() {
             console.log(filePath, fileName);
             console.log('global.wifi.network'.green, global.globalPath);
 
-            async.series([
-                function (cb) {
-                    var target = path.join(filePath, 'Global');
-                    if (!fs.existsSync(target))
-                        fsextra.mkdirpSync(target);
-                    if (os.platform() === 'darwin') {
-                        mount_auto_os_x(global.globalPath, target,function () {
+            var jobs = [];
+            jobs.push(function (cb) {
+                var target = path.join(filePath, 'Global');
+                if (!fs.existsSync(target))
+                    fsextra.mkdirpSync(target);
+                if (os.platform() === 'darwin') {
+                    mount_auto_os_x(global.globalPath, target,function () {
+                        cb();
+                    });
+                } else {
+                    mount_auto(global.globalPath, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
+                        function () {
                             cb();
                         });
-                    } else {
-                        mount_auto(global.globalPath, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
-                            function () {
-                                cb();
-                            });
-                    }
-                },
-                function (cb) {
-                    var target = path.join(filePath, 'datasource');
-                    if (!fs.existsSync(target))
-                        fsextra.mkdirpSync(target);
-                    if (os.platform() === 'darwin') {
-                        mount_auto_os_x(global.datasource, target,function () {
-                            cb();
-                        });
-                    } else {
-                        mount_auto(global.datasource, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
-                            function () {
-                                cb();
-                            });
-                    }
-                },
-                function (cb) {
-                    console.log('/ == '.green, filePath.red);
-                    posix.chroot(filePath);
-                    process.chdir('/');
-
-                    app.use(vhost('global.wifi.network', staticServer('/Global')));
-
-                    if (!fs.existsSync('/Data')) fs.mkdirSync('/Data');
-                    if (!fs.existsSync('/Share')) fs.mkdirSync('/Share');
-
-                    //console.log(fs.readdirSync('/'));
-
-                    if (argv.static) { // STATIC
-                        app.use(vhost(global.host, staticServer('/')));
-                    }
-                    else if (argv.dynamic) { // DYNAMIC
-                        var dynamicApp = require('/' + fileName);
-                        app.use(vhost(global.host, function(req, res){
-                            Server.emit('request', req, res);
-                        }));
-                    }
-                    cb();
                 }
-            ], function (err) {
+            });
+            jobs.push(function (cb) {
+                var target = path.join(filePath, 'datasource');
+                if (!fs.existsSync(target))
+                    fsextra.mkdirpSync(target);
+                if (os.platform() === 'darwin') {
+                    mount_auto_os_x(global.datasource, target,function () {
+                        cb();
+                    });
+                } else {
+                    mount_auto(global.datasource, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
+                        function () {
+                            cb();
+                        });
+                }
+            });
+            if(global.symbol){
+                jobs.push(function(cb){
+                    var target = path.join(filePath, 'Symbol');
+                    if (!fs.existsSync(target))
+                        fsextra.mkdirpSync(target);
+                    if (os.platform() === 'darwin') {
+                        mount_auto_os_x(global.symbol, target,function () {
+                            cb();
+                        });
+                    } else {
+                        mount_auto(global.symbol, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
+                            function () {
+                                cb();
+                            });
+                    }
+                });
+            }
+            jobs.push(function (cb) {
+                console.log('/ == '.green, filePath.red);
+                posix.chroot(filePath);
+                process.chdir('/');
+
+                app.use(vhost('global.wifi.network', staticServer('/Global')));
+
+                if (!fs.existsSync('/Data')) fs.mkdirSync('/Data');
+                if (!fs.existsSync('/Share')) fs.mkdirSync('/Share');
+
+                //console.log(fs.readdirSync('/'));
+
+                if (argv.static) { // STATIC
+                    app.use(vhost(global.host, staticServer('/')));
+                }
+                else if (argv.dynamic) { // DYNAMIC
+                    var dynamicApp = require('/' + fileName);
+                    app.use(vhost(global.host, function(req, res){
+                        Server.emit('request', req, res);
+                    }));
+                }
+                cb();
+            });
+            async.series(jobs, function (err) {
                 app.listen(80);
             });
         } catch (err) {

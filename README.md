@@ -37,3 +37,8 @@ $ edge-emu -c
 ```
 $ edge-emu -g /repo/global
 ```
+
+[6] **specify symbol resource folder (absolute path): **
+```
+$ edge-emu -g /resource/symbolsymbol
+```

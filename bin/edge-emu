@@ -13,6 +13,7 @@ var argv = require('optimist')
     .alias('c', 'clean')
     .alias('s', 'static')
     .alias('d', 'dynamic')
+    .alias('m', 'symbol')
     .argv;
 var fsextra = require("fs-extra");
 require('../modules/use');
@@ -20,6 +21,7 @@ require('../modules/commands');
 var posix = require('posix');
 var user = require('../modules/user');
 var api = require("../lib/api");
+var Brand = require("../lib/Brand");
 var express = require('express');
 var vhost = require('vhost');
 var webexServer = require("../Servers/webExServer");
@@ -39,16 +41,8 @@ function setGlobal() {
     global.Server = http.createServer();
     global.globalPath = path.resolve(path.join(__dirname, '../Global'));
 
-    var hosts = [{
-        ip: '127.0.0.1', names: [
-            'api.wifi.network'
-        ]
-    },
-        {
-            ip: '127.0.0.1', names: [
-            'global.wifi.network'
-        ]
-        }];
+    var hosts = [{ ip: '127.0.0.1',
+        names: [ 'global.wifi.network', 'api.wifi.network' ]}];
     global.host = argv.host ? argv.host : 'wifi.network';
     hosts.push({
         ip: '127.0.0.1',
@@ -62,6 +56,14 @@ function setGlobal() {
 
     if(argv.global) {
         global.globalPath = path.resolve(argv.global);
+    }
+
+    if(argv.symbol) {
+        global.symbol = argv.symbol;
+        Brand.Initialize(function(err){
+            if(err) return console.log('symbol init err'.red, err);
+            return console.log('symbol init successful.'.green);
+        });
     }
 }
 

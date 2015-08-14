@@ -465,7 +465,7 @@
       },
       "MDNS": {},
       "SSDP": {},
-      "Band": "WLAN2G",
+      "Band": "WLAN5G",
       "P0F": {}
     }
   },

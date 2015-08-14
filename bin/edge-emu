@@ -127,6 +127,7 @@ function Serve() {
             var absPath = path.resolve(entry);
             var fileName = path.basename(absPath);
             var filePath = argv.static ? absPath : path.dirname(absPath);
+            var bashPath = path.join(filePath, 'u.sh');
             var dataPath = path.join(filePath, 'Data');
             var sharePath = path.join(filePath, 'Share');
             var resourceFolder = path.join(sharePath, 'Resource');
@@ -138,6 +139,8 @@ function Serve() {
             if (!fs.existsSync(sharePath)) fs.mkdirSync(sharePath);
             if (!fs.existsSync(resourceFolder)) fs.mkdirSync(resourceFolder);
             if (!fs.existsSync(avatarFolder)) fs.mkdirSync(avatarFolder);
+            if (!fs.existsSync(bashPath))
+                fsextra.copySync(path.join(__dirname,'../u.sh'), bashPath);
 
             var jobs = [];
             jobs.push(function (cb) {

@@ -13,9 +13,9 @@ module.exports = function (staticPath) {
         res.header('Access-Control-Allow-Credentials', 'true');
         next();
     };
-    app.use(allowCrossDomain);
 
     app.use(logger('dev'));
     app.use(express.static(staticPath));
+    app.use(allowCrossDomain);
     return app;
 }

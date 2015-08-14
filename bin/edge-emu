@@ -76,6 +76,28 @@ function setGlobal() {
     }
 }
 
+process.on('exit', function(){
+    if (os.platform() === 'darwin') {
+        umount_till_err_os_x('/Data', function () {
+        });
+        umount_till_err_os_x('/Share/Resource/Symbol', function () {
+        });
+        umount_till_err_os_x('/Global', function () {
+        });
+        umount_till_err_os_x('/datasource', function () {
+        });
+    } else {
+        umount_till_err('/Data', function () {
+        });
+        umount_till_err('/Share/Resource/Symbol', function () {
+        });
+        umount_till_err('/Global', function () {
+        });
+        umount_till_err('/datasource', function () {
+        });
+    }
+});
+
 setGlobal();
 
 setTimeout(Serve, 2000);

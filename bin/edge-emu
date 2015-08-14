@@ -108,12 +108,14 @@ function Serve() {
             var dataPath = path.join(filePath, 'Data');
             var sharePath = path.join(filePath, 'Share');
             var resourceFolder = path.join(sharePath, 'Resource');
+            var avatarFolder = path.join(resourceFolder, 'Avatar');
             console.log(filePath, fileName);
             console.log('global.wifi.network'.green, global.globalPath);
 
             if (!fs.existsSync(dataPath)) fs.mkdirSync(dataPath);
             if (!fs.existsSync(sharePath)) fs.mkdirSync(sharePath);
             if (!fs.existsSync(resourceFolder)) fs.mkdirSync(resourceFolder);
+            if (!fs.existsSync(avatarFolder)) fs.mkdirSync(avatarFolder);
 
             var jobs = [];
             jobs.push(function (cb) {

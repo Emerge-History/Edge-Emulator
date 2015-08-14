@@ -49,5 +49,6 @@ demo/Global
 demo/Data
 demo/Share
 demo/datasource
+demo/Symbol
 
 secret.json

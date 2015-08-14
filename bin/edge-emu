@@ -105,8 +105,15 @@ function Serve() {
             var absPath = path.resolve(entry);
             var fileName = path.basename(absPath);
             var filePath = argv.static ? absPath : path.dirname(absPath);
+            var dataPath = path.join(filePath, 'Data');
+            var sharePath = path.join(filePath, 'Share');
+            var resourceFolder = path.join(sharePath, 'Resource');
             console.log(filePath, fileName);
             console.log('global.wifi.network'.green, global.globalPath);
+
+            if (!fs.existsSync(dataPath)) fs.mkdirSync(dataPath);
+            if (!fs.existsSync(sharePath)) fs.mkdirSync(sharePath);
+            if (!fs.existsSync(resourceFolder)) fs.mkdirSync(resourceFolder);
 
             var jobs = [];
             jobs.push(function (cb) {
@@ -141,7 +148,7 @@ function Serve() {
             });
             if(global.symbol){
                 jobs.push(function(cb){
-                    var target = path.join(filePath, 'Symbol');
+                    var target = path.join(resourceFolder, 'Symbol');
                     if (!fs.existsSync(target))
                         fsextra.mkdirpSync(target);
                     if (os.platform() === 'darwin') {
@@ -162,9 +169,6 @@ function Serve() {
                 process.chdir('/');
 
                 app.use(vhost('global.wifi.network', staticServer('/Global')));
-
-                if (!fs.existsSync('/Data')) fs.mkdirSync('/Data');
-                if (!fs.existsSync('/Share')) fs.mkdirSync('/Share');
 
                 //console.log(fs.readdirSync('/'));
 

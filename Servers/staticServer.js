@@ -15,7 +15,7 @@ module.exports = function (staticPath) {
     };
 
     app.use(logger('dev'));
-    app.use(express.static(staticPath));
     app.use(allowCrossDomain);
+    app.use(express.static(staticPath));
     return app;
 }

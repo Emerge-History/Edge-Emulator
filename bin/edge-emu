@@ -14,6 +14,7 @@ var argv = require('optimist')
     .alias('s', 'static')
     .alias('d', 'dynamic')
     .alias('m', 'symbol')
+    .alias('f', 'folder')
     .argv;
 var fsextra = require("fs-extra");
 require('../modules/use');
@@ -30,7 +31,11 @@ var etcHosts = require('etc-hosts');
 
 process.on('exit', function () {
     etcHosts.write([]);
+}).on('uncaughtException', function (err) {
+    console.log(err);
+    console.log(err.stack);
 });
+
 
 function setGlobal() {
     global.path = require("path");
@@ -50,33 +55,53 @@ function setGlobal() {
     global.globalPath = path.resolve(path.join(__dirname, '../Global'));
     global.datasource = path.resolve(path.join(__dirname, '../datasource'));
 
-    var hosts = [{ ip: '127.0.0.1',
-        names: [ 'global.wifi.network', 'api.wifi.network' ]}];
-    global.host = argv.host ? argv.host : 'wifi.network';
-    hosts.push({
+    global.hosts = [{
         ip: '127.0.0.1',
-        names: [global.host]
-    });
-    etcHosts.write(hosts);
+        names: ['global.wifi.network', 'api.wifi.network']
+    }];
+    global.host = argv.host ? argv.host : 'wifi.network';
+    global.hosts[0].names.push(global.host);
 
     if (argv.clean) {
         etcHosts.write([]);
     }
 
-    if(argv.global) {
+    if (argv.global) {
         global.globalPath = path.resolve(argv.global);
     }
 
-    if(argv.symbol) {
+    if (argv.symbol) {
         global.symbol = path.resolve(argv.symbol);
-        Brand.Initialize(function(err){
-            if(err) return console.log('symbol init err'.red, err);
+        Brand.Initialize(function (err) {
+            if (err) return console.log('symbol init err'.red, err);
             return console.log('symbol init successful.'.green);
         });
     }
+
+    if (argv.folder) {
+        global.appsFolder = path.resolve(argv.folder);
+        var stat = fs.statSync(global.appsFolder);
+        if (!stat.isDirectory())
+            throw new Error("-f must specify a folder!");
+        global.appsBasename = path.basename(global.appsFolder);
+        global.apps = {};
+        var dirs = fs.readdirSync(global.appsFolder);
+        for (var i = 0, len = dirs.length; i < len; i++) {
+            var dir = path.join(global.appsFolder, dirs[i]);
+            if (fs.statSync(dir).isDirectory()) {
+                var appJs = path.join(dir, "app.js");
+                var manifest = path.join(dir, "manifest.json");
+                if (fs.existsSync(appJs) && fs.existsSync(manifest)) {
+                    var appManifest = fsextra.readJsonSync(manifest);
+                    global.apps[appManifest.url] =
+                        '/' + global.appsBasename + '/' + appManifest.url;
+                }
+            }
+        }
+    }
 }
 
-process.on('exit', function(){
+process.on('exit', function () {
     if (os.platform() === 'darwin') {
         umount_till_err_os_x('/Data', function () {
         });
@@ -85,6 +110,8 @@ process.on('exit', function(){
         umount_till_err_os_x('/Global', function () {
         });
         umount_till_err_os_x('/datasource', function () {
+        });
+        umount_till_err_os_x('/apps', function () {
         });
     } else {
         umount_till_err('/Data', function () {
@@ -95,12 +122,14 @@ process.on('exit', function(){
         });
         umount_till_err('/datasource', function () {
         });
+        umount_till_err('/apps', function () {
+        });
     }
 });
 
 setGlobal();
 
-setTimeout(Serve, 2000);
+Serve();
 
 function Serve() {
     if (argv.log) {
@@ -140,7 +169,7 @@ function Serve() {
             if (!fs.existsSync(resourceFolder)) fs.mkdirSync(resourceFolder);
             if (!fs.existsSync(avatarFolder)) fs.mkdirSync(avatarFolder);
             if (!fs.existsSync(bashPath))
-                fsextra.copySync(path.join(__dirname,'../u.sh'), bashPath);
+                fsextra.copySync(path.join(__dirname, '../u.sh'), bashPath);
 
             var jobs = [];
             jobs.push(function (cb) {
@@ -148,7 +177,7 @@ function Serve() {
                 if (!fs.existsSync(target))
                     fsextra.mkdirpSync(target);
                 if (os.platform() === 'darwin') {
-                    mount_auto_os_x(global.globalPath, target,function () {
+                    mount_auto_os_x(global.globalPath, target, function () {
                         cb();
                     });
                 } else {
@@ -163,7 +192,7 @@ function Serve() {
                 if (!fs.existsSync(target))
                     fsextra.mkdirpSync(target);
                 if (os.platform() === 'darwin') {
-                    mount_auto_os_x(global.datasource, target,function () {
+                    mount_auto_os_x(global.datasource, target, function () {
                         cb();
                     });
                 } else {
@@ -173,13 +202,13 @@ function Serve() {
                         });
                 }
             });
-            if(global.symbol){
-                jobs.push(function(cb){
+            if (global.symbol) {
+                jobs.push(function (cb) {
                     var target = path.join(resourceFolder, 'Symbol');
                     if (!fs.existsSync(target))
                         fsextra.mkdirpSync(target);
                     if (os.platform() === 'darwin') {
-                        mount_auto_os_x(global.symbol, target,function () {
+                        mount_auto_os_x(global.symbol, target, function () {
                             cb();
                         });
                     } else {
@@ -188,6 +217,33 @@ function Serve() {
                                 cb();
                             });
                     }
+                });
+            }
+            if (global.appsBasename) {
+                jobs.push(function (cb) {
+                    var target = path.join(filePath, global.appsBasename);
+                    if (!fs.existsSync(target))
+                        fsextra.mkdirpSync(target);
+                    if (os.platform() === 'darwin') {
+                        mount_auto_os_x(global.appsFolder, target, function () {
+                            cb();
+                        });
+                    } else {
+                        mount_auto(global.appsFolder, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
+                            function () {
+                                cb();
+                            });
+                    }
+                });
+            }
+            if (global.apps) {
+                jobs.push(function (cb) {
+                    for (var appUrl in global.apps) {
+                        var appDomain = appUrl + '.wifi.network';
+                        global.hosts[0].names.push(appDomain);
+                    }
+                    etcHosts.write(global.hosts);
+                    setTimeout(cb, 1500);
                 });
             }
             jobs.push(function (cb) {
@@ -203,11 +259,24 @@ function Serve() {
                     app.use(vhost(global.host, staticServer('/')));
                 }
                 else if (argv.dynamic) { // DYNAMIC
-                    var dynamicApp = require('/' + fileName);
-                    app.use(vhost(global.host, function(req, res){
+                    require('/' + fileName);
+                    app.use(vhost(global.host, function (req, res) {
                         Server.emit('request', req, res);
                     }));
                 }
+
+                if (global.apps) {
+                    for (var appUrl in global.apps) {
+                        var appPath = global.apps[appUrl];
+                        if (fs.existsSync(appPath)) {
+                            var appInstance = require(path.join(appPath, 'app.js'));
+                            var appDomain = appUrl + '.wifi.network';
+                            console.log("loading app".green, appDomain);
+                            app.use(vhost(appDomain, appInstance));
+                        }
+                    }
+                }
+
                 cb();
             });
             async.series(jobs, function (err) {

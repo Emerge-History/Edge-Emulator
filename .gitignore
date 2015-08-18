@@ -50,6 +50,7 @@ demo/Data
 demo/Share
 demo/datasource
 demo/Symbol
+demo/apps
 demo/u.sh
 
 secret.json

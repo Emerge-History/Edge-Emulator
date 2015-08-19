@@ -181,7 +181,7 @@ function Serve() {
                         cb();
                     });
                 } else {
-                    mount_auto(global.globalPath, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
+                    mount_auto(global.globalPath, target, ["-o", "ro", "--bind", '-o', 'noexec,nosuid,nodev'],
                         function () {
                             cb();
                         });
@@ -196,7 +196,7 @@ function Serve() {
                         cb();
                     });
                 } else {
-                    mount_auto(global.datasource, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
+                    mount_auto(global.datasource, target, ["-o", "ro", "--bind", '-o', 'noexec,nosuid,nodev'],
                         function () {
                             cb();
                         });
@@ -212,7 +212,7 @@ function Serve() {
                             cb();
                         });
                     } else {
-                        mount_auto(global.symbol, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
+                        mount_auto(global.symbol, target, ["-o", "ro", "--bind", '-o', 'noexec,nosuid,nodev'],
                             function () {
                                 cb();
                             });
@@ -229,7 +229,7 @@ function Serve() {
                             cb();
                         });
                     } else {
-                        mount_auto(global.appsFolder, target, ["--bind", '-o', 'noexec,nosuid,nodev'],
+                        mount_auto(global.appsFolder, target, ["-o", "ro", "--bind", '-o', 'noexec,nosuid,nodev'],
                             function () {
                                 cb();
                             });
